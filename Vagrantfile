@@ -11,6 +11,7 @@ MACHINES = {
         :net => [
             ["192.168.1.1", 2, "255.255.255.0","net-1"]
         ],
+        :ports => [ [8080, 8088] ]
     },
 
     :elk => {
@@ -50,7 +51,13 @@ Vagrant.configure("2") do |config|
         boxconfig[:net].each do |ipconf|
             box.vm.network("private_network", ip: ipconf[0], adapter: ipconf[1], netmask: ipconf[2], virtualbox__intnet: ipconf[3])
         end
-  
+
+        if boxconfig.key?(:ports)
+            boxconfig[:ports].each do |guest, host|
+                box.vm.network "forwarded_port", guest: guest, host: host
+            end
+        end
+
         box.vm.provision "shell", inline: <<-SHELL
           mkdir -p ~root/.ssh
           cp ~vagrant/.ssh/auth* ~root/.ssh
