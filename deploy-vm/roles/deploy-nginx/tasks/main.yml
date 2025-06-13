@@ -1,49 +1,5 @@
 ---
 
-# Создание дирректории для сборки
-#- name: create build directory
-#  file: 
-#    path: /root/dockerfiles
-#    state: directory
-#    owner: root 
-#    group: root
-#    mode: '0644'
-  
-# Загрузка образа nginx
-#- name: Pull nginx image
-#  community.docker.docker_image:
-#    name: nginx:latest
-#    source: pull
-  
-# Копирование исходных файлов
-#- name: copy source file on hosts
-#  template: 
-#    src: "{{ item }}"
-#    dest: /root/dockerfiles
-#    owner: root
-#    group: root
-#    mode: '0644'
-#  loop:
-#  - ./source-web/Dockerfile
-#  - ./source-web/index.html
-  
-# Сборка образа контейнера
-#- name: build container image
-#  docker_image:
-#    name: nginx_test:v1.0
-#    source: build
-#    build:
-#      path: /root/dockerfiles
-#    state: present
-   
-# Запуск контейнера
-#- name: run container
-#  docker_container: 
-#    name: nginx
-#    image: nginx_test:v1.0
-#    published_ports:
-#    - "8080:80"
-
 - name: Create app dirrectory
   file:
     path: "{{ app_base_dir }}"
@@ -73,7 +29,7 @@
   - { src: "{{ local_html_config }}", dest: "{{ html_config_dir }}/index.html" }
   - { src: "{{ local_filebeat_file }}", dest: "{{ filebeat_config_dir }}/filebeat.yml"}
 
-#- name: Start ELK services
-#  command: docker-compose up -d --build
-#  args:
-#    chdir: "{{ app_base_dir }}"
+- name: Start ELK services
+  command: docker-compose up -d
+  args:
+    chdir: "{{ app_base_dir }}"

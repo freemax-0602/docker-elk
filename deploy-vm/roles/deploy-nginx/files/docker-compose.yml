@@ -9,7 +9,7 @@ services:
       - "8080:80"
     restart: unless-stopped
   beats:
-    image: elastic/filebeat:8.7.1
+    image: elastic/filebeat:7.16.2
     user: root
     volumes:
       - /opt/deploy-nginx/configs/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
