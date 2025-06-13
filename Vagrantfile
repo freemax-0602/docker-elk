@@ -1,9 +1,6 @@
 # -*- mode: ruby -*-
 # vim: set ft=ruby :
 
-# -*- mode: ruby -*-
-# vim: set ft=ruby :
-
 MACHINES = {
     :web => {
         :box_name => "ubuntu/jammy64",
@@ -20,6 +17,7 @@ MACHINES = {
         :net => [
             ["192.168.1.2", 2, "255.255.255.0","net-1"]
         ],
+        :ports => [ [5601,5602] ]
     },
 
     :rsyslog => {
@@ -39,7 +37,7 @@ Vagrant.configure("2") do |config|
         box.vm.host_name = boxconfig[:vm_name]
         
         box.vm.provider "virtualbox" do |v|
-            if boxconfig[:vm_name] == "log"
+            if boxconfig[:vm_name] == "elk"
                 v.memory = 4096
                 v.cpus = 2
             else
@@ -59,8 +57,10 @@ Vagrant.configure("2") do |config|
         end
 
         box.vm.provision "shell", inline: <<-SHELL
-          mkdir -p ~root/.ssh
-          cp ~vagrant/.ssh/auth* ~root/.ssh
+            mkdir -p ~root/.ssh
+            cp ~vagrant/.ssh/auth* ~root/.ssh
+            sudo sed -i 's/\#PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+            systemctl restart sshd
         SHELL
 
       end

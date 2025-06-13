@@ -1,0 +1,8 @@
+---
+
+- name: Deploy nginx
+  hosts: all
+  become: true
+
+  roles:
+    - deploy-vm

@@ -1,0 +1,37 @@
+---
+
+- name: Create app dirrectory
+  file:
+    path: "{{ app_base_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Create config dirrectory
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+  - "{{ elasticsearch_config_dir }}"
+  - "{{ logstash_config_dir }}"
+  - "{{ kibana_config_dir }}"
+
+- name: Copy Docker Compose file
+  template: 
+    src: "{{ local_compose_file }}"
+    dest: "{{ app_base_dir }}/docker-compose.yml"
+    mode: '0664'
+
+- name: Copy application files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0664'
+  loop:
+  - { src: "{{ local_elasticsearch_config }}", dest: "{{ elasticsearch_config_dir }}/config.yml" }
+  - { src: "{{ local_logstash_config }}", dest: "{{ logstash_config_dir }}/config.yml"}
+  - { src: "{{ local_kibana_config }}", dest: "{{ kibana_config_dir }}/config.yml"}
+
+#- name: Start ELK services
+#  command: docker-compose up -d --build
+#  args:
+#    chdir: "{{ app_base_dir }}"

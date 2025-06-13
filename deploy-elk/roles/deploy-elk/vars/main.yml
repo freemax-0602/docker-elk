@@ -1,0 +1,16 @@
+---
+# Основные пути
+app_base_dir: /opt/deploy-elk
+app_config_dir: "{{ app_base_dir }}/configs"
+
+# Пути для компонентов
+elasticsearch_config_dir: "{{ app_config_dir }}/elasticsearch"
+logstash_config_dir: "{{ app_config_dir }}/logstash"
+kibana_config_dir: "{{ app_config_dir }}/kibana"
+
+# Локальные пути к файлам (относительно роли)
+local_config_dir: "files"
+local_elasticsearch_config: "{{ local_config_dir }}/elasticsearch/config.yml"
+local_logstash_config: "{{ local_config_dir }}/logstash/config.yml"
+local_kibana_config: "{{ local_config_dir }}/kibana/config.yml"
+local_compose_file: "deploy-configs/docker-compose.yml"
