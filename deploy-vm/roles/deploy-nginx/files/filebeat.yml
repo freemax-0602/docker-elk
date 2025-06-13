@@ -1,0 +1,16 @@
+filebeat.inputs:
+- type: filestream
+  enabled: true
+  paths:
+    - /var/log/nginx/access.log 
+    - /var/log/nginx/error.log
+  fields:
+    app: nginx
+    environment: production
+  fields_under_root: true
+
+# Отправляем в Logstash вместо Elasticsearch
+output.logstash:
+  hosts: ["192.168.1.2:5044"]  # Укажите IP и порт Logstash
+
+setup.ilm.enabled: false

@@ -1,2 +1,36 @@
 # docker-elk
 Install ELK on docker 
+
+#input {
+#  beats {
+#    port => 5044
+#    ssl => false
+#  }
+#}
+
+#filter {
+#  if [app] == "nginx" {
+#    grok {
+#      match => { 
+#        "message" => '%{IPORHOST:remote_ip} - %{USER:user} \[%{HTTPDATE:timestamp}\] "%{WORD:method} %{URIPATHPARAM:request} HTTP/%{NUMBER:http_version}" %{NUMBER:status} %{NUMBER:bytes_sent} "%{DATA:referrer}" "%{DATA:user_agent}"' 
+#      }
+#      remove_field => ["message"]
+#    }
+#    date {
+#      match => [ "timestamp", "dd/MMM/yyyy:HH:mm:ss Z" ]
+#      target => "@timestamp"
+#    }
+#  }
+#}
+#
+#output {
+#  elasticsearch {
+#    hosts => ["http://192.168.1.2:9200"]  # Используйте имя сервиса из docker-compose
+#    index => "nginx-logs-%{+YYYY.MM.dd}"
+#    user => "elastic"
+#    password => "MyPw123"
+#    template => "/usr/share/logstash/templates/nginx-template.json"
+#    template_name => "nginx"
+#    template_overwrite => true
+#  }
+#}

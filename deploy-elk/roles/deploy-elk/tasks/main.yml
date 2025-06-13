@@ -14,6 +14,7 @@
   - "{{ elasticsearch_config_dir }}"
   - "{{ logstash_config_dir }}"
   - "{{ kibana_config_dir }}"
+  - "{{ logstash_pipelines_config_dir }}"
 
 - name: Copy Docker Compose file
   template: 
@@ -30,6 +31,8 @@
   - { src: "{{ local_elasticsearch_config }}", dest: "{{ elasticsearch_config_dir }}/config.yml" }
   - { src: "{{ local_logstash_config }}", dest: "{{ logstash_config_dir }}/config.yml"}
   - { src: "{{ local_kibana_config }}", dest: "{{ kibana_config_dir }}/config.yml"}
+  - { src: "{{ local_pipeline }}", dest: "{{ logstash_config_dir }}/pipelines.yml"}
+  - { src: "{{ local_pipeline }}", dest: "{{ logstash_pipelines_config_dir }}/nginx_logstash.conf"}
 
 #- name: Start ELK services
 #  command: docker-compose up -d --build

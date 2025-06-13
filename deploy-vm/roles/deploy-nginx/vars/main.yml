@@ -5,8 +5,10 @@ app_config_dir: "{{ app_base_dir }}/configs"
 
 # Пути для компонентов
 html_config_dir: "{{ app_config_dir }}/html"
+filebeat_config_dir: "{{ app_config_dir }}/filebeat"
 
 # Локальные пути к файлам (относительно роли)
 local_config_dir: "files"
 local_html_config: "{{ local_config_dir }}/index.html"
 local_compose_file: "files/docker-compose.yml"
+local_filebeat_file: "{{ local_config_dir }}/filebeat.yml"
