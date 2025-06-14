@@ -1,0 +1,4 @@
+*.yml linguist-language=YAML
+*.yaml linguist-language=YAML
+*.j2 linguist-language=YAML
+docker-compose.yml linguist-language=YAML
