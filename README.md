@@ -101,8 +101,8 @@ Vagrant VM (web)                     Vagrant VM (elk)
     b0547fbdaaff   elasticsearch:7.16.1   "/bin/tini -- /usr/l…"   20 hours ago   Up 20 hours   0.0.0.0:9200->9200/tcp, :::9200->9200/tcp, 0.0.0.0:9300->9300/tcp, :::9300->9300/tcp                                              deploy-elk-elasticsearch-1
     ```
 ## Запущенный веб-интерфейс Kibana (доступ по http://<your_IP>:5602)
-<img src="images/elasticsearch-status.jpg" width="600" alt="Elasticsearch Health Check">
+![Kibana Interface](images/elasticsearch-status.jpg)
 
 ## Индексы `nginx-logs-*` на созданном дашборде
-<img src="images/elasticsearch-status.jpg" width="600" alt="Index nginx-logs-* on Dashboard">
+![Index nginx-logs-* on Kibana Dashboard](images/elasticsearch-status.jpg)
     
