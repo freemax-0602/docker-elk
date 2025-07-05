@@ -10,5 +10,7 @@ filebeat_config_dir: "{{ app_config_dir }}/filebeat"
 # Локальные пути к файлам (относительно роли)
 local_config_dir: "files"
 local_html_config: "{{ local_config_dir }}/index.html"
-local_compose_file: "files/docker-compose.yml"
 local_filebeat_file: "{{ local_config_dir }}/filebeat.yml"
+
+# Локальные пути к docker-compose файлам (относительно роли)
+local_compose_file: "../../../../docker/deploy-nginx/docker-compose.yml"

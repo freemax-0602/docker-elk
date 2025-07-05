@@ -8,7 +8,7 @@ MACHINES = {
         :net => [
             ["192.168.1.1", 2, "255.255.255.0","net-1"]
         ],
-        :ports => [ [8080, 8088] ]
+        :ports => [ [8080, 8088] ],
     },
 
     :elk => {
@@ -18,14 +18,6 @@ MACHINES = {
             ["192.168.1.2", 2, "255.255.255.0","net-1"]
         ],
         :ports => [ [5601,5602] ]
-    },
-
-    :rsyslog => {
-        :box_name => "ubuntu/jammy64",
-        :vm_name => "syslog",
-        :net => [
-            ["192.168.1.3", 2, "255.255.255.0","net-1"]
-        ],
     }
 }
 
@@ -65,7 +57,7 @@ Vagrant.configure("2") do |config|
 
       end
     end
-  end
+end
   
         
 

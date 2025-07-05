@@ -1,0 +1,22 @@
+services:
+  nginx:
+    image: nginx:1.10.1-alpine
+    container_name: my-nginx
+    volumes:
+      - ./configs/html/index.html:/usr/share/nginx/html/index.html  # Только ваш файл
+      - ./logs:/var/log/nginx  # Монтируем логи НА ХОСТ
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+  beats:
+    image: elastic/filebeat:7.16.2
+    user: root
+    volumes:
+      - /opt/deploy-nginx/configs/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./logs:/var/log/nginx:ro  # Те же логи, что и у Nginx (read-only)
+    entrypoint: ["sh", "-c"]
+    command: |
+      "chmod 644 /usr/share/filebeat/filebeat.yml && 
+      exec /usr/local/bin/docker-entrypoint -e"
+    depends_on:
+      - nginx

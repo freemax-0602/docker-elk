@@ -5,5 +5,5 @@
   become: true
 
   roles:
-    - deploy-elk
+    - ansible/roles/deploy-elk
 

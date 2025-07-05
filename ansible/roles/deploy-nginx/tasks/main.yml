@@ -33,3 +33,8 @@
   command: docker-compose up -d
   args:
     chdir: "{{ app_base_dir }}"
+
+- name: Start nginx and filebeat services
+  command: docker-compose up -d --build
+  args:
+    chdir: "{{ app_base_dir }}"
